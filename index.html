@@ -704,39 +704,45 @@ This intensive journey helped me rediscover control—stabilizing my body, rebui
 
     // 导航栏滚动效果
     window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      const backToTop = document.getElementById('back-to-top');
+      // 检查是否为桌面设备（视口宽度大于768px，对应HTML中的md:前缀）
+      const isDesktop = window.matchMedia('(min-width: 768px)').matches;
       
-      if (window.scrollY > 50) {
-        navbar.classList.add('bg-light', 'shadow-md');
-        navbar.classList.remove('bg-transparent', 'bg-gradient-to-b', 'from-light/10', 'to-light/50');
-        navbar.querySelectorAll('a:not(.text-dark)').forEach(link => {
-          link.classList.remove('text-light');
-          link.classList.add('text-dark');
-        });
-        navbar.querySelectorAll('#menu-toggle i').forEach(icon => {
-          icon.classList.remove('text-light');
-          icon.classList.add('text-dark');
-        });
+      // 只有桌面设备才执行滚动逻辑
+      if (isDesktop) {
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('back-to-top');
         
-        // 显示回到顶部按钮
-        backToTop.classList.remove('opacity-0', 'invisible');
-        backToTop.classList.add('opacity-100', 'visible');
-      } else {
-        navbar.classList.remove('bg-light', 'shadow-md');
-        navbar.classList.add('bg-transparent', 'bg-gradient-to-b', 'from-light/10', 'to-light/50');
-        navbar.querySelectorAll('a:not(.text-light)').forEach(link => {
-          link.classList.add('text-light');
-          link.classList.remove('text-dark');
-        });
-        navbar.querySelectorAll('#menu-toggle i').forEach(icon => {
-          icon.classList.add('text-light');
-          icon.classList.remove('text-dark');
-        });
-        
-        // 隐藏回到顶部按钮
-        backToTop.classList.add('opacity-0', 'invisible');
-        backToTop.classList.remove('opacity-100', 'visible');
+        if (window.scrollY > 50) {
+          navbar.classList.add('bg-light', 'shadow-md');
+          navbar.classList.remove('bg-transparent', 'bg-gradient-to-b', 'from-light/10', 'to-light/50');
+          navbar.querySelectorAll('a:not(.text-dark)').forEach(link => {
+            link.classList.remove('text-light');
+            link.classList.add('text-dark');
+          });
+          navbar.querySelectorAll('#menu-toggle i').forEach(icon => {
+            icon.classList.remove('text-light');
+            icon.classList.add('text-dark');
+          });
+          
+          // 显示回到顶部按钮
+          backToTop.classList.remove('opacity-0', 'invisible');
+          backToTop.classList.add('opacity-100', 'visible');
+        } else {
+          navbar.classList.remove('bg-light', 'shadow-md');
+          navbar.classList.add('bg-transparent', 'bg-gradient-to-b', 'from-light/10', 'to-light/50');
+          navbar.querySelectorAll('a:not(.text-light)').forEach(link => {
+            link.classList.add('text-light');
+            link.classList.remove('text-dark');
+          });
+          navbar.querySelectorAll('#menu-toggle i').forEach(icon => {
+            icon.classList.add('text-light');
+            icon.classList.remove('text-dark');
+          });
+          
+          // 隐藏回到顶部按钮
+          backToTop.classList.add('opacity-0', 'invisible');
+          backToTop.classList.remove('opacity-100', 'visible');
+        }
       }
     });
 
